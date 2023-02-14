@@ -9,10 +9,21 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~47.0.12",
+    "components": "^0.1.0",
+    "constants": "^0.0.2",
+    "expo": "^47.0.13",
     "expo-status-bar": "~1.4.2",
+    "list": "^2.0.19",
+    "native": "^0.2.0",
+    "prop-types": "^15.8.1",
     "react": "18.1.0",
-    "react-native": "0.70.5"
+    "react-native": "0.70.5",
+    "react-native-swipe-list-view": "^3.2.9",
+    "react-native-web": "~0.18.7",
+    "styled": "^1.0.0",
+    "styled-components": "^5.3.6",
+    "swipe": "^1.7.7",
+    "view": "^0.6.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
