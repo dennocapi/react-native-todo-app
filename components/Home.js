@@ -5,6 +5,7 @@ import { Text } from "react-native";
 //components
 import Header from "./Header";
 import ListItems from "./ListItems";
+import InputModal from "./InputModal";
 
 const Home = () => {
   // initial todos
@@ -35,8 +36,9 @@ const Home = () => {
 
   return (
     <>
-      <Header handleClearTodos ={handleClearTodos}/>;
+      <Header handleClearTodos={handleClearTodos} />;
       <ListItems todos={todos} setTodos={setTodos} />
+      <InputModal />
     </>
   );
 };
