@@ -17,7 +17,7 @@ import {
 import { SwipeListView } from "react-native-swipe-list-view";
 import { Entypo } from "@expo/vector-icons";
 
-const ListItems = ({ todos, setTodos }) => {
+const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
   //For styling currently swipped todo row
   const [swipedRow, setSwipedRow] = useState(null);
 
@@ -38,7 +38,7 @@ const ListItems = ({ todos, setTodos }) => {
             const RowText =
               data.item.key == swipedRow ? SwipedTodoText : TodoText;
             return (
-              <ListView underlayColor={colors.primary} onPress={() => {}}>
+              <ListView underlayColor={colors.primary} onPress={() => {handleTriggerEdit(data.item)}}>
                 <>
                   <RowText>{data.item.title}</RowText>
                   <TodoDate>{data.item.date}</TodoDate>
