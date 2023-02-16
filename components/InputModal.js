@@ -1,6 +1,8 @@
-import React from "react";
-
-import { Modal } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Modal, Alert } from "react-native";
+import * as Location from "expo-location";
+import Constants from "expo-constants";
+import axios from "axios";
 
 import {
   ModalButton,
@@ -14,41 +16,80 @@ import {
   colors,
 } from "./../styles/appStyles";
 import { AntDesign } from "@expo/vector-icons";
+
 const InputModal = ({
   modalVisible,
   setModalVisible,
   todoInputValue,
   setTodoInputValue,
   handleAddTodo,
+  handleEditTodo,
   todoToBeEdited,
   setTodoToBeEdited,
-  handleEditTodo,
   todos,
 }) => {
+  const [permissionStatus, setPermissionStatus] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      setPermissionStatus(status);
+    })();
+  }, []);
+
   const handleCloseModal = () => {
     setModalVisible(false);
     setTodoInputValue("");
     setTodoToBeEdited(null);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (permissionStatus !== "granted") {
+      Alert.alert(
+        "Location permission required",
+        "Please enable location permission to create a todo",
+        [{ text: "OK" }]
+      );
+      return;
+    }
+
+    const location = await Location.getCurrentPositionAsync();
+
+    const response = await axios.get(
+      `https://nominatim.openstreetmap.org/reverse?lat=${location.coords.latitude}&lon=${location.coords.longitude}&format=jsonv2`
+    );
+
+    const { city, county, state, country } = response.data.address;
+    const region = state || county; // Use county if state is not available
+
+    const newTodo = {
+      title: todoInputValue,
+      date: new Date().toUTCString(),
+      key: new Date(),
+      location: {
+        address: `${city}, ${region}, ${country}`,
+        coords: {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        },
+      },
+    };
+
     if (!todoToBeEdited) {
-      handleAddTodo({
-        title: todoInputValue,
-        date: new Date().toUTCString(),
-        key: `${
-          todos[todos.length - 1] && parseInt(todos[todos.length - 1].key) + 1
-        }`,
-      });
+      handleAddTodo(newTodo);
     } else {
       handleEditTodo({
         title: todoInputValue,
         date: todoToBeEdited.date,
         key: todoToBeEdited.key,
+        location: todoToBeEdited.key,
       });
     }
+
     setTodoInputValue("");
+    setModalVisible(false);
   };
+
   return (
     <>
       <ModalButton

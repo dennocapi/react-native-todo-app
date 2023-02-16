@@ -20,7 +20,7 @@ const Home = ({ todos, setTodos }) => {
 
   // Modal visibility & input value
   const [modalVisible, setModalVisible] = useState(false);
-  const [todoInputValue, setTodoInputValue] = useState();
+  const [todoInputValue, setTodoInputValue] = useState("");
 
   // function to add todo
   const handleAddTodo = (todo) => {

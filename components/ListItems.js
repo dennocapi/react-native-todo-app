@@ -37,8 +37,8 @@ const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
 
   return (
     <>
-      {todos.length == 0 && <TodoText>You have no todos today</TodoText>}
-      {todos.length != 0 && (
+      {todos.length == 0 ? <TodoText>You have no todos today</TodoText> : null}
+      {todos.length != 0 ? (
         <SwipeListView
           data={todos}
           renderItem={(data) => {
@@ -53,6 +53,7 @@ const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
               >
                 <>
                   <RowText>{data.item.title}</RowText>
+                  <TodoDate>{data.item.location.address}</TodoDate>
                   <TodoDate>{data.item.date}</TodoDate>
                 </>
               </ListView>
@@ -87,7 +88,7 @@ const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
             setSwipedRow(null);
           }}
         />
-      )}
+      ) : null}
     </>
   );
 };

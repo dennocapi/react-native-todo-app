@@ -1,6 +1,7 @@
-import react from "react";
+import React from "react";
+import { View } from "react-native";
 
-// stylrd components
+// styled components
 import {
   HeaderView,
   HeaderTitle,
@@ -12,12 +13,20 @@ import { Entypo } from "@expo/vector-icons";
 
 const Header = ({ handleClearTodos }) => {
   return (
-    <HeaderView>
-      <HeaderTitle>Todos</HeaderTitle>
-      <HeaderButton onPress={handleClearTodos}>
-        <Entypo name="trash" size={25} color={colors.tertiary} />
-      </HeaderButton>
-    </HeaderView>
+    <>
+      <HeaderView>
+        <HeaderTitle>Todos</HeaderTitle>
+        <HeaderButton onPress={handleClearTodos}>
+          <Entypo name="trash" size={25} color={colors.tertiary} />
+        </HeaderButton>
+      </HeaderView>
+      <View
+        style={{
+          borderBottomColor: colors.tertiary,
+          borderBottomWidth: 1,
+        }}
+      />
+    </>
   );
 };
 

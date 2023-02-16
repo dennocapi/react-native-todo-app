@@ -15,7 +15,7 @@ import AppLoading from "expo-app-loading";
 export default function App() {
   // initial todos
   const initialTodos = [];
-  
+
   const [ready, setReady] = useState(false);
 
   const [todos, setTodos] = useState(initialTodos);

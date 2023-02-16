@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "react-native-todo-app",
-    "slug": "react-native-todo-app",
+    "name": "Todos",
+    "slug": "todoApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,6 +21,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "todos.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -28,6 +29,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b2363a0c-59f1-4f1b-a8ef-c1a94d601449"
+      }
     }
   }
 }
