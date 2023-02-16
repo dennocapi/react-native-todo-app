@@ -1,37 +1,21 @@
 import React, { useState } from "react";
 
-import { Text } from "react-native";
-
 //components
 import Header from "./Header";
 import ListItems from "./ListItems";
 import InputModal from "./InputModal";
 
-const Home = () => {
-  // initial todos
-  const initialTodos = [
-    {
-      title: "Get some snacks",
-      date: Date.now(),
-      key: "1",
-    },
-    {
-      title: "Go shopping",
-      date: Date.now(),
-      key: "2",
-    },
-    {
-      title: "Watch football",
-      date: Date.now(),
-      key: "3",
-    },
-  ];
+// async storage
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-  const [todos, setTodos] = useState(initialTodos);
-
-  //clear all todos
+const Home = ({ todos, setTodos }) => {
   const handleClearTodos = () => {
-    setTodos([]);
+    AsyncStorage.setItem("storedTodos", JSON.stringify([]))
+      .then(() => {
+        //clear all todos
+        setTodos([]);
+      })
+      .catch((error) => console.log(error));
   };
 
   // Modal visibility & input value
@@ -41,8 +25,13 @@ const Home = () => {
   // function to add todo
   const handleAddTodo = (todo) => {
     const newTodos = [...todos, todo];
-    setTodos(newTodos);
-    setModalVisible(false);
+
+    AsyncStorage.setItem("storedTodos", JSON.stringify(newTodos))
+      .then(() => {
+        setTodos(newTodos);
+        setModalVisible(false);
+      })
+      .catch((error) => console.log(error));
   };
 
   // Editing
@@ -57,9 +46,14 @@ const Home = () => {
     const newTodos = [...todos];
     const todoIndex = todos.findIndex((todo) => todo.key === editedTodo.key);
     newTodos.splice(todoIndex, 1, editedTodo);
-    setTodos(newTodos);
-    setTodoToBeEdited(null);
-    setModalVisible(false);
+
+    AsyncStorage.setItem("storedTodos", JSON.stringify(newTodos))
+      .then(() => {
+        setTodos(newTodos);
+        setModalVisible(false);
+        setTodoToBeEdited(null);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
