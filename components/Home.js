@@ -1,7 +1,13 @@
 import React, { useState } from "react";
+import {
+  HeaderView,
+  HeaderTitle,
+  HeaderButton,
+  HeaderButtonText,
+  HeaderUnderline,
+} from "../styles/appStyles";
 
 //components
-import Header from "./Header";
 import ListItems from "./ListItems";
 import InputModal from "./InputModal";
 
@@ -58,7 +64,13 @@ const Home = ({ todos, setTodos }) => {
 
   return (
     <>
-      <Header handleClearTodos={handleClearTodos} />;
+      <HeaderView>
+        <HeaderTitle>Todos</HeaderTitle>
+        <HeaderButton onPress={handleClearTodos}>
+          <HeaderButtonText>Clear all</HeaderButtonText>
+        </HeaderButton>
+      </HeaderView>
+      <HeaderUnderline />
       <ListItems
         todos={todos}
         setTodos={setTodos}

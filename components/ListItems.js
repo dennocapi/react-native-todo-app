@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import { Text } from "react-native";
-
 //styled components
 
 import {
@@ -12,10 +10,13 @@ import {
   HiddenButton,
   SwipedTodoText,
   colors,
+  CompleteTaskButton
 } from "../styles/appStyles";
 
 import { SwipeListView } from "react-native-swipe-list-view";
 import { Entypo } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+
 
 // async storage
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -41,7 +42,8 @@ const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
       {todos.length != 0 ? (
         <SwipeListView
           data={todos}
-          renderItem={(data) => {
+          renderItem={(data,RowMap) => {
+            console.log('------------------------------',data)
             const RowText =
               data.item.key == swipedRow ? SwipedTodoText : TodoText;
             return (
@@ -52,8 +54,19 @@ const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
                 }}
               >
                 <>
+                  {/* <CompleteTaskButton>
+                    <AntDesign
+                      name="checksquareo"
+                      size={28}
+                      color={colors.tertiary}
+                    />
+                  </CompleteTaskButton> */}
                   <RowText>{data.item.title}</RowText>
-                  <TodoDate>{data.item.location.address}</TodoDate>
+                  <TodoDate>
+                    {data.item.location.address.region +
+                      ", " +
+                      data.item.location.address.country}
+                  </TodoDate>
                   <TodoDate>{data.item.date}</TodoDate>
                 </>
               </ListView>

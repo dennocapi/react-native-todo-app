@@ -18,7 +18,6 @@ export const colors = {
   accent: "#EC4E20",
 };
 
-
 const statusBarHeight = Constants.statusBarHeight;
 
 export const Container = styled.SafeAreaView`
@@ -31,23 +30,41 @@ export const Container = styled.SafeAreaView`
 
 // Header
 export const HeaderView = styled.View`
-  padding-vertical: 10px;
-  margin-bottom: 10px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 15px;
+  background-color: ${colors.primary};
 `;
 
 export const HeaderTitle = styled.Text`
-  font-size: 35px;
+  font-size: 24px;
   font-weight: bold;
   color: ${colors.tertiary};
-  letter-spacing: 2px;
-  font-style: italic;
 `;
+
 export const HeaderButton = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+`;
+export const CompleteTaskButton = styled.Text`
+  font-size: 18px;
   font-weight: bold;
   color: ${colors.tertiary};
+  margin-right: 2px;
+`;
+
+export const HeaderButtonText = styled.Text`
+  font-size: 18px;
+  font-weight: bold;
+  color: ${colors.tertiary};
+  margin-left: 5px;
+`;
+
+export const HeaderUnderline = styled.View`
+  border-bottom-width: 1px;
+  border-bottom-color: ${colors.secondary};
+  margin-bottom: 15px;
 `;
 
 // List

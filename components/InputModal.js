@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Alert } from "react-native";
 import * as Location from "expo-location";
-import Constants from "expo-constants";
 import axios from "axios";
 
 import {
@@ -47,7 +46,7 @@ const InputModal = ({
     if (permissionStatus !== "granted") {
       Alert.alert(
         "Location permission required",
-        "Please enable location permission to create a todo",
+        "Please exit the app and enable location permission upon entry to create a todo",
         [{ text: "OK" }]
       );
       return;
@@ -64,15 +63,22 @@ const InputModal = ({
 
     const newTodo = {
       title: todoInputValue,
-      date: new Date().toUTCString(),
+      date: new Date()
+        .toLocaleString("en-US", {
+          weekday: "short",
+          day: "numeric",
+          month: "short",
+        })
+        .toUpperCase(),
       key: new Date(),
       location: {
-        address: `${city}, ${region}, ${country}`,
+        address: { city: city, region: region, country: country },
         coords: {
           latitude: location.coords.latitude,
           longitude: location.coords.longitude,
         },
       },
+      completed: false,
     };
 
     if (!todoToBeEdited) {
@@ -82,7 +88,18 @@ const InputModal = ({
         title: todoInputValue,
         date: todoToBeEdited.date,
         key: todoToBeEdited.key,
-        location: todoToBeEdited.key,
+        location: {
+          address: {
+            city: todoToBeEdited.location.address.city,
+            region: todoToBeEdited.location.address.region,
+            country: todoToBeEdited.location.address.country,
+          },
+          coords: {
+            latitude: todoToBeEdited.location.coords.latitude,
+            longitude: todoToBeEdited.location.coords.longitude,
+          },
+        },
+        completed: todoToBeEdited.completed,
       });
     }
 
