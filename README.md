@@ -106,5 +106,9 @@ The Todos app is a simple mobile application that demonstrates basic usage of Re
 you should be able to set up and run the app on your device or simulator, as well as modify the app's code to add new functionality.
 
 
+**Contributing**
+If you want to contribute to this project, feel free to submit a pull request. Please make sure to follow the Contribution Guidelines when submitting your changes.
 
+**License**
+This project is licensed under the MIT License.
 
