@@ -63,9 +63,9 @@ const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
                   </CompleteTaskButton> */}
                   <RowText>{data.item.title}</RowText>
                   <TodoDate>
-                    {data.item.location.address.region +
+                    {data.item.location.coords.latitude +
                       ", " +
-                      data.item.location.address.country}
+                      data.item.location.coords.longitude}
                   </TodoDate>
                   <TodoDate>{data.item.date}</TodoDate>
                 </>

@@ -5,7 +5,6 @@ import {
   HeaderView,
   HeaderTitle,
   HeaderButton,
-  ClearAllText,
   HeaderButtonText,
   HeaderButtonContainer,
   colors,
